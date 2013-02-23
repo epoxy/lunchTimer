@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TimerActivity extends Activity implements OnClickListener{
-	
+
 	private int timerStartValueMinutes, secondsLeftTotal, secondsLeftInitial, seconds, minutes;
 	private int secondsOnes, secondsTens, minutesOnes, minutesTens, hoursOnes;
 	private static CountDownTimer lunchTimer;
@@ -22,8 +22,7 @@ public class TimerActivity extends Activity implements OnClickListener{
 	private MainActivity mainActivity;
 	private boolean timerRunning, timerShouldNotExist;
 	private ImageView hour1, hour2, minutes1, minutes2, seconds1, seconds2;
-	private NumberContainer hr1, hr2, mn1, mn2, sc1, sc2;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,9 +35,9 @@ public class TimerActivity extends Activity implements OnClickListener{
 			System.out.println("TESSSSSSSSSSSSST: " + timerStartValueMinutes);
 			createTimer();
 			secondsLeftInitial = secondsLeftTotal;
-			
+
 		}
-		
+
 		//Buttons
 		cancelButton = (ImageButton) findViewById(R.id.pauseButton);
 		cancelButton.setOnClickListener((OnClickListener) this);
@@ -48,7 +47,7 @@ public class TimerActivity extends Activity implements OnClickListener{
 		endButton.setOnClickListener((OnClickListener) this);
 		stopButton = (ImageButton) findViewById(R.id.stopButton);
 		stopButton.setOnClickListener((OnClickListener) this);
-		
+
 		//ImageViews
 		hour1 = (ImageView) findViewById(R.id.imageNr1);
 		hour2 = (ImageView) findViewById(R.id.imageNr2);
@@ -56,14 +55,16 @@ public class TimerActivity extends Activity implements OnClickListener{
 		minutes2 = (ImageView) findViewById(R.id.imageNr4);
 		seconds1 = (ImageView) findViewById(R.id.imageNr5);
 		seconds2 = (ImageView) findViewById(R.id.imageNr6);
-		
-		
+
+
 	}
-	
+
 	private void createTimer() {
 		lunchTimer = new CountDownTimer(secondsLeftTotal*1000, 1000) {
+			NumberContainer numbers = new NumberContainer(secondsLeftTotal);
 			@Override
 			public void onTick(long millisUntilFinished) {
+				numbers.countDown();
 				secondsLeftTotal = secondsLeftTotal - 1;
 				minutes = secondsLeftTotal/60;
 				minutesOnes = minutes%10;
@@ -71,13 +72,9 @@ public class TimerActivity extends Activity implements OnClickListener{
 				seconds = secondsLeftTotal%60;
 				secondsOnes = seconds%10;
 				secondsTens = seconds/10;
-				changeNrImage();
 				System.out.println("" + minutes + ":" + seconds);
 			}
-			private void changeNrImage() {
-				
-				
-			}
+
 			@Override
 			public void onFinish() {
 				System.out.println("00:00");
@@ -116,7 +113,7 @@ public class TimerActivity extends Activity implements OnClickListener{
 			android.os.Process.killProcess(android.os.Process.myPid());
 		}
 	}
-	
+
 	public void restart(){
 		if(timerRunning){
 			lunchTimer.cancel();
@@ -131,12 +128,12 @@ public class TimerActivity extends Activity implements OnClickListener{
 		getMenuInflater().inflate(R.menu.activity_timer, menu);
 		return true;
 	}
-	
-	
+
+
 	public static CountDownTimer getTimer(){
 		return lunchTimer;
 	}
-	
+
 	public void onBackPressed() {
 		if(timerShouldNotExist){
 			lunchTimer=null;
