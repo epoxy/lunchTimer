@@ -1,6 +1,7 @@
 package com.wysiwyg.lunchtimer;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -17,6 +18,11 @@ public class MainActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		if(TimerActivity.getTimer()!=null){
+			intent = new Intent(this, TimerActivity.class);
+			startActivity(intent);
+		}
 
 		//Buttons
 		thirtyMinsButton = (ImageButton) findViewById(R.id.imageButton1);
@@ -49,12 +55,13 @@ public class MainActivity extends Activity implements OnClickListener{
 			startActivity(intent);
 		}
 		if(v==customButton){
-			System.out.println("Custom!");
-			//TODO gör detta värde valbart!
-			intent = new Intent(this, TimerActivity.class);
-			intent.putExtra("minutes", 45);
-			startActivity(intent);
+//			System.out.println("Custom!");
+//			//TODO gör detta värde valbart!
+//			intent = new Intent(this, TimerActivity.class);
+//			intent.putExtra("minutes", 45);
+//			startActivity(intent);
+			//timerActivity.getTimer().cancel();
+			TimerActivity.getTimer().cancel();
 		}
 	}
-
 }

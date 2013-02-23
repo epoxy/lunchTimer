@@ -12,18 +12,47 @@ public final class R {
     }
     public static final class drawable {
         public static final int custom=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int sixtymins=0x7f020002;
-        public static final int thirtymins=0x7f020003;
-        public static final int title=0x7f020004;
+        public static final int endlunch=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int img0=0x7f020003;
+        public static final int img1=0x7f020004;
+        public static final int img2=0x7f020005;
+        public static final int img3=0x7f020006;
+        public static final int img4=0x7f020007;
+        public static final int img5=0x7f020008;
+        public static final int img6=0x7f020009;
+        public static final int img7=0x7f02000a;
+        public static final int img8=0x7f02000b;
+        public static final int img9=0x7f02000c;
+        public static final int kolon=0x7f02000d;
+        public static final int pause=0x7f02000e;
+        public static final int restart=0x7f02000f;
+        public static final int sixtymins=0x7f020010;
+        public static final int stop=0x7f020011;
+        public static final int thirtymins=0x7f020012;
+        public static final int title=0x7f020013;
     }
     public static final class id {
+        public static final int endButton=0x7f070012;
         public static final int imageButton1=0x7f070002;
         public static final int imageButton2=0x7f070003;
         public static final int imageButton3=0x7f070004;
+        public static final int imageKolon1=0x7f070009;
+        public static final int imageKolon2=0x7f07000c;
+        public static final int imageNr1=0x7f070007;
+        public static final int imageNr2=0x7f070008;
+        public static final int imageNr3=0x7f07000a;
+        public static final int imageNr4=0x7f07000b;
+        public static final int imageNr5=0x7f07000d;
+        public static final int imageNr6=0x7f07000e;
         public static final int imageView1=0x7f070001;
+        public static final int linearLayout3=0x7f070006;
         public static final int linearlayout1=0x7f070000;
-        public static final int menu_settings=0x7f070005;
+        public static final int linearlayout2=0x7f070005;
+        public static final int menu_settings=0x7f070013;
+        public static final int pauseButton=0x7f07000f;
+        public static final int restartButton=0x7f070010;
+        public static final int stopButton=0x7f070011;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
