@@ -21,23 +21,18 @@ public class TimerActivity extends Activity implements OnClickListener{
 	private ImageButton cancelButton, restartButton, endButton, stopButton;
 	private MainActivity mainActivity;
 	private boolean timerRunning, timerShouldNotExist;
-	private ImageView hour1, hour2, minutes1, minutes2, seconds1, seconds2;
+	private ImageView[] numberViews;
+	private String imgString = "img", imgPicture;
+	private int resID;
+	private Drawable drawableNumber;
+	private NumberContainer numbers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timer);
 		Intent intent = getIntent();
-		if(lunchTimer==null){
-			//Initiate timervalues
-			timerStartValueMinutes = intent.getIntExtra("minutes", timerStartValueMinutes);
-			secondsLeftTotal=timerStartValueMinutes*60;
-			System.out.println("TESSSSSSSSSSSSST: " + timerStartValueMinutes);
-			createTimer();
-			secondsLeftInitial = secondsLeftTotal;
-
-		}
-
+		
 		//Buttons
 		cancelButton = (ImageButton) findViewById(R.id.pauseButton);
 		cancelButton.setOnClickListener((OnClickListener) this);
@@ -47,32 +42,49 @@ public class TimerActivity extends Activity implements OnClickListener{
 		endButton.setOnClickListener((OnClickListener) this);
 		stopButton = (ImageButton) findViewById(R.id.stopButton);
 		stopButton.setOnClickListener((OnClickListener) this);
-
+		
 		//ImageViews
-		hour1 = (ImageView) findViewById(R.id.imageNr1);
-		hour2 = (ImageView) findViewById(R.id.imageNr2);
-		minutes1 = (ImageView) findViewById(R.id.imageNr3);
-		minutes2 = (ImageView) findViewById(R.id.imageNr4);
-		seconds1 = (ImageView) findViewById(R.id.imageNr5);
-		seconds2 = (ImageView) findViewById(R.id.imageNr6);
-
-
+		numberViews = new ImageView[6];
+		numberViews[0] = (ImageView) findViewById(R.id.imageNr1);
+		numberViews[1] = (ImageView) findViewById(R.id.imageNr2);
+		numberViews[2] = (ImageView) findViewById(R.id.imageNr3);
+		numberViews[3] = (ImageView) findViewById(R.id.imageNr4);
+		numberViews[4] = (ImageView) findViewById(R.id.imageNr5);
+		numberViews[5] = (ImageView) findViewById(R.id.imageNr6);
+		
+		if(lunchTimer==null){
+			//Initiate timervalues
+			timerStartValueMinutes = intent.getIntExtra("minutes", timerStartValueMinutes);
+			secondsLeftTotal=timerStartValueMinutes*60;
+			System.out.println("TESSSSSSSSSSSSST: " + timerStartValueMinutes);
+			secondsLeftInitial = secondsLeftTotal;
+			createTimer();
+		}
 	}
 
 	private void createTimer() {
+		numbers = new NumberContainer(secondsLeftTotal);
+		System.out.println("1111");
 		lunchTimer = new CountDownTimer(secondsLeftTotal*1000, 1000) {
-			NumberContainer numbers = new NumberContainer(secondsLeftTotal);
 			@Override
 			public void onTick(long millisUntilFinished) {
+				System.out.println("222");
 				numbers.countDown();
 				secondsLeftTotal = secondsLeftTotal - 1;
-				minutes = secondsLeftTotal/60;
-				minutesOnes = minutes%10;
-				minutesTens = minutes/10;
-				seconds = secondsLeftTotal%60;
-				secondsOnes = seconds%10;
-				secondsTens = seconds/10;
+//				minutes = secondsLeftTotal/60;
+//				minutesOnes = minutes%10;
+//				minutesTens = minutes/10;
+//				seconds = secondsLeftTotal%60;
+//				secondsOnes = seconds%10;
+//				secondsTens = seconds/10;
 				System.out.println("" + minutes + ":" + seconds);
+				
+				for(int i=0; i<=5; i++){
+					imgPicture = imgString + numbers.getNumber(i);
+					resID = getResources().getIdentifier(imgPicture, "drawable", getPackageName());
+					drawableNumber = getResources().getDrawable(resID);
+					numberViews[i].setImageDrawable(drawableNumber);
+				}
 			}
 
 			@Override
